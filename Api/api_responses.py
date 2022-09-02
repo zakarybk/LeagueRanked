@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
+from riot.riot_responses import LeagueEntryDTO
 
 
 @dataclass
@@ -8,8 +9,8 @@ class User:
     level: int
     revisionDate: int
     id: str
-    solo: str
-    flex: str
+    solo: LeagueEntryDTO
+    flex: LeagueEntryDTO
     profileIconId: str
     server: str
     utc: datetime

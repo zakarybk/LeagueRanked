@@ -32,12 +32,13 @@ def fetch_user(server, name) -> User:
 
         if ranked:
             app.logger.info(f"Fetched summoner ranked {server}:{name}")
-            solo = list(filter(lambda row: row.queueType == 'RANKED_SOLO_5x5', ranked))
-            flex = list(filter(lambda row: row.queueType == 'RANKED_FLEX_SR', ranked))
+            app.logger.debug(list(map(lambda row: row.miniSeries, ranked)))
+            solo = next(filter(lambda row: row.queueType == 'RANKED_SOLO_5x5', ranked), None)
+            flex = next(filter(lambda row: row.queueType == 'RANKED_FLEX_SR', ranked), None)
             in_game = current_game.gameId > 0 if current_game else False # may or may not be correct
 
-            solo = stats.summary(solo[0]) if solo else "Unranked"
-            flex = stats.summary(flex[0]) if flex else "Unranked"
+            solo = stats.summary(solo) if solo else "Unranked"
+            flex = stats.summary(flex) if flex else "Unranked"
 
             return User(
                 username=summoner.name,

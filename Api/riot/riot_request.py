@@ -14,6 +14,8 @@ class RiotRequest:
         self.api_key = api_key
         self.riot_url = RiotUrl(api_key)
         self.session = session
+        if api_key is None or api_key=="":
+            raise ValueError("No API key specified!")
 
 
     def _load_into_response(self, response_class, data):
@@ -23,11 +25,10 @@ class RiotRequest:
 
         kwargs = {}
         for field in dataclasses.fields(response_class):
-            val = data.get(field.name, field.default)
             if dataclasses.is_dataclass(field.type):
-                kwargs[field.name] = self._load_into_response(field.type, val)
+                kwargs[field.name] = self._load_into_response(field.type, data.get(field.name, {}))
             else:
-                kwargs[field.name] = val
+                kwargs[field.name] = data.get(field.name, field.default)
         return response_class(**kwargs)
 
 
