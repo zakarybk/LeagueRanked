@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Union
 
 
 """
@@ -153,3 +153,29 @@ class CurrentGameInfo:
     """ The observer information """
     participants: List[CurrentGameParticipant] = None
     """ The participant information """
+
+
+# Duplicate below since these are both static
+RiotResponseType = Union[
+    SummonerDTO,
+    MiniSeriesDTO,
+    LeagueEntryDTO,
+    BannedChampion,
+    Observer,
+    Perks,
+    GameCustomizationObject,
+    CurrentGameParticipant,
+    CurrentGameInfo
+]
+__all__ = [
+    'SummonerDTO',
+    'MiniSeriesDTO',
+    'LeagueEntryDTO',
+    'BannedChampion',
+    'Observer',
+    'Perks',
+    'GameCustomizationObject',
+    'CurrentGameParticipant',
+    'CurrentGameInfo',
+    'RiotResponseType'
+]

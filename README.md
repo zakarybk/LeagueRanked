@@ -23,6 +23,9 @@
 # API:
 ### Made with
 - Python
-- Flask
-- Requests
+- FastAPI
+- HTTPX
 - [Custom build League Of Legends API](https://developer.riotgames.com/)
+
+### Run
+`uvicorn main:app --reload`
